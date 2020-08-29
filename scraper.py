@@ -20,7 +20,8 @@ def scrape_quotes(urls: List[str]) -> List[str]:
     quotes = parse_quotes(quotes)
     authors = parse_authors(authors)
     for i in range(len(quotes)):
-        finale.append(authors[i] + "  |  " + quotes[i])
+        if len(quotes[i]) < 120:
+            finale.append(authors[i] + "  |  " + quotes[i])
     return finale
 
 
