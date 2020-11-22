@@ -127,7 +127,6 @@ def print_result(register: Dict[str, List[str]], command2: str):
     return either a list of all items in the register, or a random element.
     """
     print("Your Results:\n")
-    time.sleep(1)
     quotes = []
     for author in register:
         for quote in register[author]:
@@ -137,7 +136,19 @@ def print_result(register: Dict[str, List[str]], command2: str):
             print(quote)
         print("Your search returned {} results".format(len(quotes)))
     if command2 == "Random":
-        print(random.choice(quotes))
+        while True:
+            print(random.choice(quotes))
+
+            while True:
+                inp = input("Want another in this category? y/n: ")
+                if inp == "n":
+                    return
+                if inp != "y":
+                    print("Improperly formatted. y/n")
+                else:
+                    os.system("cls")
+                    break
+
 
 
 def main():
@@ -155,11 +166,17 @@ def main():
 
         command2 = searchio()
         print_result(register, command2)
-        if input("Search again? y/n: ") == "n":
-            print("Thank you for using Quapp v0.2. Goodbye!")
-            return 0  # Finish program.
-        os.system("cls")
-        time.sleep(1)
+        while True:
+            inp = input("Search in another category? y/n: ")
+            if inp == "n":
+                print("Thank you for using Quapp v0.2. Goodbye!")
+                return 0  # Finish program.
+            elif inp != "y":
+                print("Improperly formatted. y/n")
+            else:
+                os.system("cls")
+                time.sleep(1)
+                break
 
 
 if __name__ == "__main__":
